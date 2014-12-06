@@ -21,7 +21,7 @@
          <div class ="Center-Nav" style="text-align: center;width:1250px">
             <br><br>
             <!-- Search button -->
-            <form action="brand_search.php" method="GET" >
+            <form action="search.php" method="GET" >
                <input type="text" name="search_text">
                <input type="submit" value="Search" name ="search"><br><br>
                <!-- Radio buttons -->

@@ -7,7 +7,7 @@
 
 include_once("connect.php");
 
-if(isset($_POST['review_submit'])){
+if(isset($_GET['reviews'])){
 
 $model_id=$_POST['reviews'];
 $sql1= "select * from product natural join review where model_id='$model_id'";
