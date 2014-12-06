@@ -10,6 +10,7 @@
       color:#333333;
       width: 60%;
       border-width: 1px;
+      margin-top: 1cm;
       border-color: #999999;
       border-collapse: collapse;
     }
@@ -26,6 +27,15 @@
       padding: 8px;
       border-style: solid;
       border-color: #999999;
+    }
+
+    .button_style{
+      background-color:#57A957;
+      color:white;
+      margin-top: 1cm;
+      width: 160px;
+      height: 40px;
+      margin-bottom: 1cm;
     }
   </style>
 
@@ -65,6 +75,8 @@
 
       if(!empty($_SESSION["cart_item"])) {
         ?>
+        <h3>Your Cart Summary</h3>
+        <b><a href='cart_items.php?action=empty'>Empty Cart</a></b>
         <table class="imagetable">
           <tr>
             <th>Model Name</th>
@@ -74,17 +86,26 @@
           </tr>
           <?php
           foreach($_SESSION["cart_item"] as $k => $v) {
-            echo "<tr>";
-              echo "<td>".$_SESSION["cart_item"][$k]["model_name"]."</td>";
-              echo "<td>".$_SESSION["cart_item"][$k]["quantity"]."</td>";
-              echo "<td>".$_SESSION["cart_item"][$k]["price"]."</td>";
-              echo "<td> <a href='cart_items.php?action=remove&model_id=".$_SESSION["cart_item"][$k]["model_id"]."'>Remove Item </a></td>";
-              echo "</tr>";
+              if(!empty($_SESSION["cart_item"][$k]["model_name"])) {
+                    echo "<tr>";
+                    echo "<td> <b>".$_SESSION["cart_item"][$k]["model_name"]."</b></td>";
+                    echo "<td>".$_SESSION["cart_item"][$k]["quantity"]."</td>";
+                    echo "<td>".$_SESSION["cart_item"][$k]["price"]."</td>";
+                    echo "<td> <a href='cart_items.php?action=remove&model_id=".$_SESSION["cart_item"][$k]["model_id"]."'>Remove Item </a></td>";
+                    echo "</tr>";
+              }
             }
-
             echo "</table>";
-          }
+
+            echo "<button class='button_style'><span>Proceed To Checkout</span></button>";
+          } else {
+            ?>
+            <h3>Your Cart is Empty </h3>
+            <a href="<?=$project_root?>/home.php">Continue Shopping</a><br><br>
+          <?php
+            }
           ?>
+
     </div>
 
     <div class="footer">

@@ -81,3 +81,23 @@ VALUES
 ALTER TABLE `product`
   ADD CONSTRAINT `product_ibfk_1` FOREIGN KEY (brand_id) REFERENCES brand (brand_id);
 
+
+
+CREATE TABLE IF NOT EXISTS purchase_history (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  product_id int(11) NOT NULL,
+  user_id int(11) NOT NULL,
+  quantity int(11) NOT NULL,
+  price int(11) NOT NULL,
+  date timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  KEY fk_product_id (product_id)
+) ;
+
+INSERT INTO purchase_history (`product_id`, `user_id`, `quantity`, `price`) VALUES
+(1, 1, 12, 12),
+(1, 2, 12, 12);
+
+ALTER TABLE purchase_history
+  ADD CONSTRAINT fk_product_id FOREIGN KEY (product_id) REFERENCES product (model_id);
+  
