@@ -106,10 +106,10 @@
 						?>
 
 
-							<form method="post" action="confirmation.php" ENCTYPE="multipart/form-data" >
+							<form method="post" action="confirmation.php" >
 
 								<!-- your regular form follows -->
-								<table width=60%  class ="imagetable">
+								<table width=60% >
 									<tr bgcolor="#E5E5E5">
 										<td height="22" colspan="3" align="left" valign="middle"><strong>&nbsp;Billing Information (required)</strong></td>
 									</tr>
