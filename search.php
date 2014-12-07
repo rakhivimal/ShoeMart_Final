@@ -9,6 +9,7 @@
   if(!isset($_SESSION)){
     session_start();
   }
+
   include_once("manage_cart.php");
   include_once("connect.php");
   include_once("shoe_mart_config_file.php");
@@ -34,7 +35,7 @@
   */
 
   if (isset($_GET['search'])) {
-    if ($_GET['search'] = "all") {
+    if ($_GET['search'] == "fresh") {
       unset($_SESSION["brand_name"]);
       unset($_SESSION["category"]);
       unset($_SESSION["size"]);
@@ -64,6 +65,23 @@
 
 
     $query = "SELECT model_id,image, model_name,model_price,size  FROM product where 1 ";
+
+    if (isset($_SESSION['brand_name'])){
+      echo $_SESSION['brand_name'];
+    }
+
+    if (isset($_SESSION['category'])){
+      echo $_SESSION['category'];
+    }
+    if (isset($_SESSION['size'])){
+      echo $_SESSION['size'];
+    }
+    if (isset($_SESSION['type'])){
+      echo $_SESSION['type'];
+    }
+    if (isset($_SESSION['sort_by'])){
+      echo $_SESSION['sort_by'];
+    }
 
     if (isset($_SESSION['brand_name'])){
       $query = $query. " and brand_id ='".$_SESSION['brand_name']."'";

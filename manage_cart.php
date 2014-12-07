@@ -1,7 +1,15 @@
 <?php
 
 		function addToCart($dataArray) {
-			$dataArrayVal = array('model_id'=>$dataArray[0], 'model_name'=>$dataArray[1], 'price'=>$dataArray[2], 'quantity'=>$dataArray[3]);
+
+			$sum_total = ($dataArray[3]*$dataArray[2]);
+			$shippingCharge = rand(5, 15);
+			$total_charge = $sum_total + $shippingCharge;
+
+			$dataArrayVal = array('model_id'=>$dataArray[0], 'model_name'=>$dataArray[1], 'price'=>$dataArray[2],
+			 											'quantity'=>$dataArray[3],'shippingCharge'=> $shippingCharge,
+														'total'=> $total_charge
+														);
 			$itemArray = array($dataArray[0]=>$dataArrayVal);
 			if(!empty($_SESSION["cart_item"])) {
 
@@ -23,13 +31,12 @@
 		}
 
 		function removeFromCart($model_Id) {
-			echo "Inside remove from Cart Method";
 			if(!empty($_SESSION["cart_item"])) {
 				foreach($_SESSION["cart_item"] as $k => $v) {
 					if($model_Id == $_SESSION["cart_item"][$k]['model_id']){
 						unset($_SESSION["cart_item"][$k]);
 					}
-							
+
 					if(empty($_SESSION["cart_item"]))
 						unset($_SESSION["cart_item"]);
 				}
@@ -37,7 +44,6 @@
 		}
 
 		function emptyCart($fname) {
-			echo "Inside Empty cart method";
 			unset($_SESSION["cart_item"]);
 		}
 

@@ -15,9 +15,10 @@ if(!isset($_SESSION)){
   $price  = $_POST['price'];
 	$quantity = $_POST['quantity'];
 	$image_path = $_POST['path'];
-	$brandId= $_POST['brandId'];
+	//$brandId= $_POST['brandId'];
+	$brand_name= $_POST['brand_name'];
 
-	echo $modelname;
+	echo $brand_name;
 
 
   if (empty($_POST['modelname']))  {
@@ -51,42 +52,18 @@ if(!isset($_SESSION)){
 	exit();
 	}
 
-   /* if ( !isset($_FILES['userFile']['type']) ) {
-   die('<p>No image submitted</p></body></html>');
-     }
-?>
-You submitted this file:<br /><br />
-Temporary name: <?php echo $_FILES['userFile']['tmp_name'] ?><br />
-Original name: <?php echo $_FILES['userFile']['name'] ?><br />
-Size: <?php echo $_FILES['userFile']['size'] ?> bytes<br />
-Type: <?php echo $_FILES['userFile']['type'] ?></p>
 
-<?php
-if ( !preg_match( '/gif|png|x-png|jpeg/', $_FILES['userFile']['type']) ) {
-   die('<p>Only browser compatible images allowed</p></body></html>');
-// Copy image file into a variable
-} else if ( !($handle = fopen ($_FILES['userFile']['tmp_name'], "r")) ) {
-   die('<p>Error opening temp file</p></body></html>');
-} else if ( !($image = fread ($handle, filesize($_FILES['userFile']['tmp_name']))) ) {
-   die('<p>Error reading temp file</p></body></html>');
-} else {
-   fclose ($handle);
-   // Commit image to the database
-   $image = mysql_real_escape_string($image);*/
-   //$alt = htmlentities($_POST['altText']);
-   //$query = 'INSERT INTO image (type,name,alt,img) VALUES ("' . $_FILES['userFile']['type'] . '","' . $_FILES['userFile']['name']  . '","' . $alt  . '","' . $image . '")';
+		$sql1 = "INSERT INTO product (model_name, model_price, category, type, quantity, size, image, brand_name)	VALUES	('$modelname', $price, '$category', '$type', '$quantity', '$size', '$image_path', '$brand_name')";
+		echo 	$sql1 ;
+		$result1 = mysqli_query($conn ,$sql1) or die(mysql_error());
+		/*$sql2 = "INSERT INTO brand (brand_id, brand_name)	VALUES	('','$brand_name')";
+		echo 	$sql2 ;
+
+	
+	    $result2 = mysqli_query($conn ,$sql2) or die(mysql_error());*/
 
 
-
-	//if (isset($_POST['submit']) && $modelid != ''){
-    //$sql = "INSERT INTO product (model_id,model_name,model_price,category,type,quantity,size,image) VALUES ('$modelid','$modelname','$price','$category','$type','$quantity','$size','$image_path')";
-		$sql = "INSERT INTO product (model_name, model_price, category, type, quantity, size, image, brand_id)	VALUES	('$modelname', $price, '$category', '$type', $quantity, $size, '$image_path', $brandId)";
-		echo 	$sql ;
-
-		$result = mysqli_query($conn ,$sql) or die(mysql_error());
-
-
-	if ($result==1) { // Error handling
+	if ($result1==1) { // Error handling
 	echo "success";
 	echo "<script>alert('Record inserted successfully')</script>";
     echo "<script>setTimeout(\"location.href = '$project_root/admin_add.html';\",100);</script>";

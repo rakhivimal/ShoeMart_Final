@@ -3,13 +3,18 @@
 </head>
 <body>
 <fieldset style="width:500px;">
+<form action ="" method="POST">
+ <textarea name ="review_text" rows="4" cols="50"></textarea>
+ <input type="hidden" name ="reviews" value="$_POST['reviews'];">
+ <input name="submit_review" type="submit" value="Post Review">
 <?php
 
 include_once("connect.php");
 
 if(isset($_GET['reviews'])){
 
-$model_id=$_POST['reviews'];
+$model_id=$_GET['reviews'];
+echo $model_id;
 $sql1= "select * from product natural join review where model_id='$model_id'";
 $sql2= "select * from product natural join review where model_id='$model_id'";
    $result1 = mysqli_query($conn,$sql1);
@@ -18,7 +23,7 @@ $sql2= "select * from product natural join review where model_id='$model_id'";
 
      echo "<table>" ;
 ?>
-   <tr><td> <img src="<?php echo $rows["image"]; ?>" class="border"></td>;
+   <tr><td> <img src="assets/shoe_img/<?php echo $rows["image"]; ?>" class="border"></td>;
    <td> <?php echo "<b>Model:</b> " . $rows["model_name"]."<br>";
          echo "<b>Price:</b> " . $rows["model_price"]."<br>";
          echo"</td></tr></table><br><br>";
@@ -31,6 +36,7 @@ $sql2= "select * from product natural join review where model_id='$model_id'";
 ?>
 
 	 <table >
+
     <tr><td><?php echo $row["review"];?></td></tr>
 </table>
 
@@ -43,6 +49,7 @@ echo "</table>" ;
  }
 mysqli_close($conn);
 ?>
+</form>
 </fieldset>
 </body>
 </html>

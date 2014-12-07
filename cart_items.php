@@ -33,7 +33,7 @@
       background-color:#57A957;
       color:white;
       margin-top: 1cm;
-      width: 160px;
+      width: 300px;
       height: 40px;
       margin-bottom: 1cm;
     }
@@ -82,22 +82,29 @@
             <th>Model Name</th>
             <th>Quantity</th>
             <th>Price</th>
+            <th>Shipping Charge</th>
+            <th>Total</th>
             <th>Reomve</th>
           </tr>
           <?php
+          $totalPrice=0;
           foreach($_SESSION["cart_item"] as $k => $v) {
               if(!empty($_SESSION["cart_item"][$k]["model_name"])) {
+                $totalPrice = $totalPrice +$_SESSION["cart_item"][$k]["total"];
                     echo "<tr>";
                     echo "<td> <b>".$_SESSION["cart_item"][$k]["model_name"]."</b></td>";
                     echo "<td>".$_SESSION["cart_item"][$k]["quantity"]."</td>";
                     echo "<td>".$_SESSION["cart_item"][$k]["price"]."</td>";
+                    echo "<td>".$_SESSION["cart_item"][$k]["shippingCharge"]."</td>";
+                    echo "<td>".$_SESSION["cart_item"][$k]["total"]."</td>";
                     echo "<td> <a href='cart_items.php?action=remove&model_id=".$_SESSION["cart_item"][$k]["model_id"]."'>Remove Item </a></td>";
                     echo "</tr>";
               }
             }
             echo "</table>";
+            echo " <b> The total price :".  $totalPrice. " <b><br>";
+            echo "<span class='button_style'><a href='confirmation.php'>Proceed To Checkout</a></span>";
 
-            echo "<button class='button_style'><span>Proceed To Checkout</span></button>";
           } else {
             ?>
             <h3>Your Cart is Empty </h3>
