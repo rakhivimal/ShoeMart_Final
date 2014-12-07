@@ -102,7 +102,7 @@
               }
             }
             echo "</table>";
-            echo " <b> The total price :".  $totalPrice. " <b><br>";
+            echo " <br><b> The total price :".  $totalPrice. " <b><br><br><br><br><br>";
             echo "<span class='button_style'><a href='confirmation.php'>Proceed To Checkout</a></span>";
 
           } else {

@@ -59,6 +59,10 @@
       $_SESSION["sort_by"] = $_GET["sort_by"];
     }
 
+    if (isset($_POST['sort_by'])){
+      $_SESSION["sort_by"] = $_POST["sort_by"];
+    }
+
     if (isset($_GET['type'])){
       $_SESSION["type"] = $_GET["type"];
     }
@@ -132,6 +136,17 @@
       <?php
       if (isset($result)) {
         ?>
+        <form action="search.php?search=Search" method="post" align ="left">
+          <b>Sort By </b>  <select onchange="this.form.submit();" name="sort_by">
+              <option value="model_id">--Select--</option>
+              <option value="size">Size</option>
+              <option value="brand_name">Brand</option>
+              <option value="model_price">Price</option>
+              <option value="type">Type</option>
+          </select>
+          <br><br>
+        </form>
+
         <table class ="result-table">
           <?php
           $columnMax=5;
